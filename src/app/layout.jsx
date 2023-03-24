@@ -1,4 +1,5 @@
 import "./globals.css";
+import HomeHeader from "@/components/HomeHeader";
 
 export const metadata = {
   title: "网易云音乐",
@@ -11,7 +12,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="zh">
-      <body>{children}</body>
+      <body>
+        {/* Header  */}
+        <HomeHeader />
+
+        {/* Main Content */}
+        <main>{children}</main>
+      </body>
     </html>
   );
 }
