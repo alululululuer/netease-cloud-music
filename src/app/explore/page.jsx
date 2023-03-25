@@ -3,12 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const Home = () => {
+const ExplorePage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/explore");
+    router.replace("/explore/recommend");
   }, []);
-  return <div>Home</div>;
+  return <div>ExplorePage</div>;
 };
-export default Home;
+export default ExplorePage;
