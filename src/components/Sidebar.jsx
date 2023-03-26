@@ -8,7 +8,7 @@ const menus = [
 
 const Sidebar = () => {
   return (
-    <div className="hidden bg-white lg:block w-[15rem] p-2">
+    <div className="hidden bg-white lg:block w-[15rem] p-2 border-r">
       <div className="flex flex-col gap-1">
         {menus.map(({ slug, display }) => (
           <NavLink

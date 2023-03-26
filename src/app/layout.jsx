@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         <HomeHeader />
 
         {/* Main Content */}
-        <main className="flex-grow bg-red-100 flex">
+        <main className="flex-grow flex">
           <Sidebar />
           <div className="flex-1">{children}</div>
         </main>
