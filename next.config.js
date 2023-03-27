@@ -8,6 +8,12 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "**.music.126.net",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "**.music.126.net",
+        pathname: "/**",
       },
     ],
   },

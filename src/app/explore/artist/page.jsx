@@ -1,8 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import useSWR from "swr";
+import Link from "next/link";
 
 import RadioButton from "@/components/RadioButton";
+import { fetcher } from "@/api/fetcher";
+import Card from "@/components/Card";
+import AccountLink from "@/components/AccountLink";
 
 const areas = [
   {
@@ -69,7 +74,7 @@ const initials = [
   },
 ];
 
-const ExploreArtists = () => {
+const ExploreArtists = ({ searchParams }) => {
   //歌手语种
   const [area, setArea] = useState(-1);
   //歌手分类
@@ -79,8 +84,17 @@ const ExploreArtists = () => {
 
   console.log(`area=${area} type=${type} initial=${initial}`);
 
+  const { data, error, isLoading } = useSWR(
+    `https://music-api.alululululuer.com/artist/list?type=${type}&area=${area}&initial=${initial}`,
+    fetcher
+  );
+
+  if (data) {
+    console.log(data);
+  }
+
   return (
-    <section className="grid gap-4">
+    <section className="grid gap-4 container">
       <div className="flex gap-2 flex-wrap text-sm">
         <p>语种：</p>
         <RadioButton
@@ -145,6 +159,28 @@ const ExploreArtists = () => {
             label={item.label}
             onSelect={setInitial}
           />
+        ))}
+      </div>
+
+      {isLoading && <div>loading...</div>}
+      {error && <div>failed to load</div>}
+      <div className="grid grid-cols-3 md:grid-cols-4 2xl:grid-cols-6 gap-4">
+        {data?.artists?.map((item) => (
+          <article key={item.id} className="space-y-2">
+            <Card
+              imgUrl={item.img1v1Url}
+              url={`/artist/${item.id}`}
+              name={item.name}
+              className="rounded-lg"
+            />
+
+            <div className="flex justify-between items-center">
+              <Link href={`/artist/${item.id}`}>
+                <h2 className="truncate">{item.name}</h2>
+              </Link>
+              {item.accountId && <AccountLink id={item.accountId} />}
+            </div>
+          </article>
         ))}
       </div>
     </section>
