@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer components {
-  .example {
-    @apply text-red-500;
+  .radio {
+    @apply cursor-pointer py-1 px-3 mx-4  rounded-full;
+  }
+
+  .radio--active {
+    @apply bg-red-50 text-red-500;
   }
 }
